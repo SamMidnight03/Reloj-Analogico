@@ -1,0 +1,92 @@
+:root {
+    height: 100%;
+    --background: white;
+    --primary: black;
+    --secondary: black;
+}
+
+body.dark {
+    --background: #1c1c1c;
+    --primary: white;
+    --secondary: #aaaaaa;
+}
+
+body {
+    margin: 0px;
+    height: 100%;
+    background-color: var(--background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background-color 0.5s;
+}
+
+#clock {
+    box-shadow: -5px 15px 20px -5px #00000080, inset -5px 15px 20px -5px #00000080;
+    border-radius: 100%;
+    max-width: 80vmin;
+    max-height: 80vmin;
+    width: 100%;
+    height: 100%;
+    transition: box-shadow 1s;
+}
+
+body.dark #clock {
+    box-shadow: -5px 15px 20px -5px #00000080, 5px -15px 30px -10px #ffffff2d;
+    transition: box-shadow 2s;
+}
+
+#clock span{
+    position: absolute;
+    top: calc(50% - 20px);
+    left: calc(50% - 20px);
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7vmin;
+    color: white;
+    mix-blend-mode: difference;
+}
+
+#clock .point {
+    position:absolute;
+    top: calc(50% - 2vmin);
+    left: calc(50% - 2vmin);
+    background-color: var(--primary);;
+    border-radius: 100%;
+
+    max-width: 4vmin;
+    max-height: 4vmin;
+    width: 100%;
+    height: 100%;
+}
+
+#clock .hand {
+    position:absolute;
+    top: calc(50%);
+    background-color: var(--secondary);
+    transform-origin: center top;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+}
+
+#clock #hours {
+    height: 15vmin;
+    width: 2vmin;
+    left: calc(50% - 1vmin);
+}
+#clock #minutes {
+    height: 20vmin;
+    width: 1vmin;
+    left: calc(50% - 0.5vmin);
+}
+
+#clock #seconds {
+    height: 30vmin;
+    width: 0.5vmin;
+    background-color: red;
+    left: calc(50% - 0.25vmin);
+}
