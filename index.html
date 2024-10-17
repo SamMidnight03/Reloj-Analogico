@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./Style/style.css">
+    <title>Reloj</title>
 </head>
-<body>
+<body id="body">
     <div id="clock">
-        <div id="numbers"></div>
-        <div class="hand" id="hours"></div>
-        <div class="hand" id="minutes"></div>
-        <div class="hand" id="seconds"></div>
-        <div class="point" onclick="document.querySelector('body').classList.toggle('dark')"></div>
+        <div id="numeros"></div>
+        <div class="manecillas" id="horas"></div>
+        <div class="manecillas" id="minutos"></div>
+        <div class="manecillas" id="segundos"></div>
+        <div class="punto" onclick="mood()"></div>
     </div>
-    <script src="script.js"></script>
+    <script src="./app.js"></script>
 </body>
 </html>
