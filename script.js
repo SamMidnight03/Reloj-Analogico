@@ -1,52 +1,78 @@
-const hours = document.querySelector(".hand#hours")
-const minute = document.querySelector(".hand#minutes")
-const second = document.querySelector(".hand#seconds")
+// Consegir los elementos
 
-const clock = document.querySelector("#clock")
-const numbersContainer = document.querySelector("#numbers")
+const reloj = document.getElementById("clock");
+const NumerosConten = document.getElementById("numeros");
 
-function position(num, index) {
-    let angle = (Math.PI / 180) * (90 -(index * 30));
-    let diameter = clock.clientWidth * 0.8
+// posicion de los numeros
 
-    let x = Math.cos(angle) * (diameter / 2);
-    let y = Math.sin(angle) * (diameter / 2);
+function NumberPosition(numero, index){
 
-    num.style.transform = `translate( calc(-50% - ${-x}px), calc(-50% - ${y}px) ) `
+    //calcula el diametro
+    let angulo = (Math.PI / 180) * (90 - (index * 30));// calcula el diametro y lo pone un poco mas pequeño
+    let diametro = reloj.clientWidth * 0.8;
+
+    // Para calcular la posicion
+    let x = Math.cos(angulo) * (diametro/2);
+    let y = Math.sin(angulo) * (diametro/2);
+
+    // Mover los numeros con un transform
+    numero.style.transform = `translate(calc(-50% - ${-x}px), calc(-50% - ${y}px))`
 }
 
-for (let index = 1; index <= 12; index++) {
-    let num = document.createElement("span")
 
-    position(num, index)
+//Agregar los numeros
 
-    num.id = index
-    num.innerHTML = index
-    numbersContainer.appendChild(num);
+for (let i = 1; i <= 12; i++) {
+    //crea los elementos y lo guarda
+    let numero = document.createElement("span");
+
+    NumberPosition(numero, i);
+
+    //guarda el numero
+    numero.textContent = i;
+    //inserta un elemento en una etiqueta
+    NumerosConten.appendChild(numero);
 }
 
-const numbers = document.querySelectorAll("#numbers span")
-window.onresize = function(e) {
-    numbers.forEach(num => {
-        position(num, num.id)
-    })
+window.onresize = function(){
+
+    //childNodes toma todos los hijos de un elemento y los pone en un array
+    NumerosConten.childNodes.forEach(element => {
+        NumberPosition(element, parseInt(element.textContent)); //parseInt para volver un texto a numero
+        
+    });
 }
 
-function clockupdate() {
-    const now = new Date();
+//  Segundero
+const ManSegundos = document.getElementById("segundos");
+//  Minutero
+const ManMinutos = document.getElementById("minutos");
+//  Hora
+const ManHoras = document.getElementById("horas");
 
-    const seconds = now.getSeconds();
-    const mins = now.getMinutes();
-    const hour = now.getHours();
+//Actializar fecha
 
-    const secondDeg = (seconds * 6) + 180;
-    const minuteDeg = (mins * 6) + (seconds / 10) + 180;
-    const hoursDeg  = (hour * 30) + (mins / 2) + 180;
+function antualizarHora(){
+    const date = new Date();
 
-    hours.style.transform = `rotate(${hoursDeg}deg)`;
-    minute.style.transform = `rotate(${minuteDeg}deg)`;
-    second.style.transform = `rotate(${secondDeg}deg)`;
+    const segundos = date.getSeconds();
+    const minutos = date.getMinutes();
+    const horas = date.getHours();
+
+    const anguloSegundos = (segundos * 6) + 180
+    const anguloMinutos = (minutos * 6) + (segundos / 10) + 180
+    const anguloHoras = (horas * 30) + (minutos /2)  + 180
+
+    ManSegundos.style.transform = `rotate(${anguloSegundos}deg)`
+    ManMinutos.style.transform = `rotate(${anguloMinutos}deg)`
+    ManHoras.style.transform = `rotate(${anguloHoras}deg)`
 }
 
-setInterval(clockupdate, 500)
-clockupdate()
+antualizarHora();
+setInterval(antualizarHora,500)
+
+function mood(){
+    const body = document.getElementById("body");
+
+    body.classList.toggle("dark")
+}
